@@ -4,34 +4,32 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/cf835ee7-e208-4b9f-a01f-1e04bf9b16af";
-      fsType = "f2fs";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/cf835ee7-e208-4b9f-a01f-1e04bf9b16af";
+    fsType = "f2fs";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/c60e183e-efcb-4eb1-ae23-b5abc9b136dc";
-      fsType = "f2fs";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/c60e183e-efcb-4eb1-ae23-b5abc9b136dc";
+    fsType = "f2fs";
+  };
 
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/3899-E60F";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/3899-E60F";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/ef96bb1c-a3bb-4506-9f78-79dd92fe8367"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/ef96bb1c-a3bb-4506-9f78-79dd92fe8367"; }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -43,5 +41,6 @@
   # networking.interfaces.wwan0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

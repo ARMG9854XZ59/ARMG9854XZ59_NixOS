@@ -1,4 +1,4 @@
-#
+
 
 # NixOs GhostZ5M9_OS.
 
@@ -12,14 +12,15 @@
 
 {
 
-  description = "Alex Mahdi ARMG0268XZ59 Systems Specials Modified NixOS Config";
+  description =
+    "Alex Mahdi ARMG0268XZ59 Systems Specials Modified NixOS Config";
 
   inputs = {
 
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
-  	
+
   };
 
   outputs = inputs@{ self, nixpkgs, nixpkgs-stable }: {
@@ -35,10 +36,9 @@
         ./hardware-configuration.nix
 
       ];
-    
+
     };
-  	
+
   };
 
-	
 }

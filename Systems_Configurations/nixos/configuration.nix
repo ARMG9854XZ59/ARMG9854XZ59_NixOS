@@ -1,4 +1,4 @@
-#
+
 
 # NixOs GhostZ5M9_OS.
 
@@ -14,9 +14,7 @@
 
 #
 
-
 { config, lib, pkgs, ... }:
-
 
 {
 
@@ -24,14 +22,13 @@
 
     [
 
-    # Include the results of the hardware scan.
+      # Include the results of the hardware scan.
 
       ./hardware-configuration.nix
 
     ];
 
   # imports = [ <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix> ];
-
 
   # Boot Loaders.
 
@@ -51,45 +48,45 @@
 
   # boot.loader.grub = {
 
-    # enable = true;
+  # enable = true;
 
-    # copyKernels = true;
+  # copyKernels = true;
 
-    # version = 2;
+  # version = 2;
 
-    # efiInstallAsRemovable = true;
+  # efiInstallAsRemovable = true;
 
-    # efiSupport = true;
+  # efiSupport = true;
 
-    # fsIdentifier = "uuid";
+  # fsIdentifier = "uuid";
 
-    # splashMode = "stretch";
+  # splashMode = "stretch";
 
-    # device = "nodev";
+  # device = "nodev";
 
-    # devices = ["/dev/nvme0n1"];
+  # devices = ["/dev/nvme0n1"];
 
-    # devices = [ "/dev/disk/by-uuid/3899-E60F" ];
+  # devices = [ "/dev/disk/by-uuid/3899-E60F" ];
 
-    # device = "nodev";
+  # device = "nodev";
 
-    # extraEntries = ''
+  # extraEntries = ''
 
-      # menuentry "Reboot" {
+  # menuentry "Reboot" {
 
-        # reboot
+  # reboot
 
-      # }
+  # }
 
-      # menuentry "Poweroff" {
+  # menuentry "Poweroff" {
 
-        # halt
+  # halt
 
-      # }
+  # }
 
-    # '';
+  # '';
 
-    # useOSProber = true;
+  # useOSProber = true;
 
   # };
 
@@ -99,19 +96,17 @@
 
   # boot.loader.refind = {
 
-    # enable = true;
+  # enable = true;
 
-    # copyKernels = true;
+  # copyKernels = true;
 
   # };
 
   # boot.loader.efi.canTouchEfiVariables = true;
 
-
   # Set Boot UEFI Mount.
 
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
-
 
   # Supported FileSystems.
 
@@ -131,33 +126,32 @@
 
   };
 
-
   # Enable Plymouth.
 
   boot.plymouth = {
 
     enable = true;
 
-    themePackages = with pkgs; [
+    themePackages = with pkgs;
+      [
 
-      # plymouth (breeze-plymouth.override {
+        # plymouth (breeze-plymouth.override {
 
         # nixosBranding = true;
 
         # nixosVersion = config.system.nixosRelease;
 
-      # })
+        # })
 
       ];
 
-      # theme = "plymouth-theme-bgrt";
+    # theme = "plymouth-theme-bgrt";
 
-      theme = "bgrt";
+    theme = "bgrt";
 
-      # inputs.plymouth-theme-bgrt;
+    # inputs.plymouth-theme-bgrt;
 
   };
-
 
   # Use the SystemD initrd.
 
@@ -173,7 +167,6 @@
 
   };
 
-
   # Systems Security.
 
   security = {
@@ -186,36 +179,33 @@
 
   };
 
-
   # Kernel Modules and Firmware.
 
   boot.kernelModules = [ "intel_agp" "i915" ];
 
   hardware.enableAllFirmware = true;
 
-
   # Kernel Parameters.
 
   boot.kernelParams = [
 
-  # splash
+    # splash
 
-  # rhgb
+    # rhgb
 
-  "i915.enable_guc=2"
+    "i915.enable_guc=2"
 
-  "i915.enable_fbc=1"
+    "i915.enable_fbc=1"
 
-  "i915.enable_psr=1"
+    "i915.enable_psr=1"
 
-  "intel_idle.max_cstate=9"
+    "intel_idle.max_cstate=9"
 
-  "pcie_aspm=force"
+    "pcie_aspm=force"
 
-  # "i915.enable_guc=9"
+    # "i915.enable_guc=9"
 
   ];
-
 
   # Use different Systems Kernels.
 
@@ -223,11 +213,9 @@
 
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-
   # Systems Networking.
 
   # networking.networkmanager.enable = true;
-
 
   # Systems Drivers.
 
@@ -239,11 +227,11 @@
 
   # hardware.opengl = {
 
-    # enable = true;
+  # enable = true;
 
-    # driSupport = true;
+  # driSupport = true;
 
-    # driSupport32Bit = true";
+  # driSupport32Bit = true";
 
   # };
 
@@ -269,7 +257,6 @@
 
   # ];
 
-
   # Enable Bluetooth.
 
   hardware.bluetooth = {
@@ -288,30 +275,27 @@
 
   };
 
-
   # Enable Power Management for better Battery Life.
 
   # services.tlp.enable = true;
 
   powerManagement.enable = true;
 
-
   # Enable Steam and Proton.
 
   # programs.steam = [
 
-    # enable = true
+  # enable = true
 
-    # remotePlay.openFirewall = true;
+  # remotePlay.openFirewall = true;
 
-    # dedicatedServer.openFirewall = true;
+  # dedicatedServer.openFirewall = true;
 
-    # localNetworkGameTransfers.openFirewall = true;
+  # localNetworkGameTransfers.openFirewall = true;
 
-    # "extraCompatPackages = with pkgs; [ proton-ge dxvk ];"
+  # "extraCompatPackages = with pkgs; [ proton-ge dxvk ];"
 
   # ];
-
 
   # Define hostname.
 
@@ -319,25 +303,22 @@
 
   # networking.useDHCP = true;
 
-
   # Pick only one of the below networking options.
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
 
   time.timeZone = "Europe/London";
-
 
   # Configure network proxy if necessary
 
   # networking.proxy.default = "http://user:password@proxy:port/";
 
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
 
   # Select internationalisation properties.
 
@@ -353,23 +334,19 @@
 
   # };
 
-
   # Enable the X11 windowing system.
 
   # services.xserver.enable = true;
 
-  
   # Configure keymap in X11
 
   # services.xserver.xkb.layout = "us";
 
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
-
   # Enable CUPS to print documents.
 
   services.printing.enable = true;
-
 
   # Enable sound.
 
@@ -391,11 +368,9 @@
 
   };
 
-
   # Enable touchpad support (enabled default in most desktopManager).
 
   services.libinput.enable = true;
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
@@ -407,13 +382,23 @@
 
     # Enable ‘sudo’ for the user.
 
-    extraGroups = [ "wheel" "armg0268xz59" "specials" "networkmanager" "audio" "video" "adb" "kvm" ];
-
-    packages = with pkgs; [
-
-      tree
-
+    extraGroups = [
+      "wheel"
+      "armg0268xz59"
+      "specials"
+      "networkmanager"
+      "audio"
+      "video"
+      "adb"
+      "kvm"
     ];
+
+    packages = with pkgs;
+      [
+
+        tree
+
+      ];
 
     # security.sudo.enable = true;
 
@@ -421,11 +406,9 @@
 
   };
 
-
   # programs.firefox.enable = true;
 
   programs.hyprland.enable = true;
-
 
   # Systems Software.
 
@@ -445,251 +428,253 @@
 
   environment.systemPackages = with pkgs; [
 
-  gpm
+    gpm
 
-  terminus_font
+    terminus_font
 
-  tmux
+    tmux
 
-  dvtm
+    dvtm
 
-  efibootmgr
+    efibootmgr
 
-  fwupd
+    fwupd
 
-  neovim
+    neovim
 
-  nano
+    nano
 
-  micro
+    micro
 
-  emacs
+    emacs
 
-  ghostty
+    ghostty
 
-  zsh
+    zsh
 
-  mosh
+    mosh
 
-  inxi
+    inxi
 
-  lshw
+    lshw
 
-  gimp
+    gimp
 
-  btop
+    btop
 
-  mlocate
+    mlocate
 
-  # bpytop
+    # bpytop
 
-  # home-desktopManager
+    # home-desktopManager
 
-  lm_sensors
+    lm_sensors
 
-  # lspci
+    # lspci
 
-  plymouth
+    plymouth
 
-  # plymouth-themes
+    # plymouth-themes
 
-  libsForQt5.qt5ct
+    libsForQt5.qt5ct
 
-  # libsForQt6.qt6ct
+    # libsForQt6.qt6ct
 
-  qt6ct
+    qt6ct
 
-  # qt5ctl
+    # qt5ctl
 
-  # qt6ctl
+    # qt6ctl
 
-  # layer-shell-qt5
+    # layer-shell-qt5
 
-  # layer-shell-qt6
+    # layer-shell-qt6
 
-  protonup-qt
+    protonup-qt
 
-  bottles
+    bottles
 
-  neofetch
+    neofetch
 
-  fastfetch
+    fastfetch
 
-  swww
+    swww
 
-  mpvpaper
+    mpvpaper
 
-  wofi
+    wofi
 
-  rofi
+    rofi
 
-  ags
+    ags
 
-  lolcat
+    lolcat
 
-  bat
+    bat
 
-  figlet
+    figlet
 
-  toilet
+    toilet
 
-  dialog
+    dialog
 
-  # whiptail
+    # whiptail
 
-  wget
+    wget
 
-  curl
+    curl
 
-  git
+    git
 
-  htop
+    htop
 
-  btop
+    btop
 
-  mesa
+    mesa
 
-  mesa-demos
+    mesa-demos
 
-  steam
+    steam
 
-  wine
+    wine
 
-  wine64
+    wine64
 
-  wine-staging
+    wine-staging
 
-  wineWowPackages.stable
+    wineWowPackages.stable
 
-  wineWowPackages.staging
+    wineWowPackages.staging
 
-  wineWowPackages.waylandFull
+    wineWowPackages.waylandFull
 
-  # wine-ge
+    # wine-ge
 
-  ( wine.override { wineBuild = "wine64"; } )
+    (wine.override { wineBuild = "wine64"; })
 
-  winetricks
+    winetricks
 
-  protontricks
+    protontricks
 
-  dxvk
+    dxvk
 
-  # vk3d
+    # vk3d
 
-  xwaylandvideobridge
+    xwaylandvideobridge
 
-  sddm
+    sddm
 
-  sddm-astronaut
+    sddm-astronaut
 
-  elegant-sddm
+    elegant-sddm
 
-  sddm-sugar-dark
+    sddm-sugar-dark
 
-  sddm-kcm
+    sddm-kcm
 
-  # sddm-wrapped
+    # sddm-wrapped
 
-  # kdePackages.plasma-desktopManager
+    # kdePackages.plasma-desktopManager
 
-  # kdePackages.plasma-workspace
+    # kdePackages.plasma-workspace
 
-  # kdePackages.plasma-konsole
+    # kdePackages.plasma-konsole
 
-  # kdePackages.plasma-dolphin
+    # kdePackages.plasma-dolphin
 
-  # plasma6
+    # plasma6
 
-  # plasma
+    # plasma
 
-  # plasma-desktopManager
+    # plasma-desktopManager
 
-  plasma-workspace
+    plasma-workspace
 
-  # kdeconnect
+    # kdeconnect
 
-  konsole
+    konsole
 
-  dolphin
+    dolphin
 
-  kwin
+    kwin
 
-  # john-unstable
+    # john-unstable
 
-  # unstable.asusctl
+    # unstable.asusctl
 
-  # unstable.qidi-slicer-bin
+    # unstable.qidi-slicer-bin
 
-  wireguard-tools
+    wireguard-tools
 
-  brightnessctl
+    brightnessctl
 
-  pavucontrol
+    pavucontrol
 
-  xclip
+    xclip
 
-  xsel
+    xsel
 
-  powertop
+    powertop
 
-  tlp
+    tlp
 
-  # tlp_rdw
+    # tlp_rdw
 
-  lemurs
+    lemurs
 
-  xdg-desktop-portal-kde
+    xdg-desktop-portal-kde
 
-  xdg-desktop-portal-hyprland
+    xdg-desktop-portal-hyprland
 
-  waybar
+    waybar
 
-  waypaper
+    waypaper
 
-  hyprland
+    hyprland
 
-  chntpw
+    chntpw
 
-  nmap
+    nmap
 
-  wireshark
+    wireshark
 
-  aircrack-ng
+    aircrack-ng
 
-  # john
+    # john
 
-  hashcat
+    hashcat
 
-  hydra
+    hydra
 
-  metasploit
+    metasploit
 
-  sqlmap
+    sqlmap
 
-  gobuster
+    gobuster
 
-  burpsuite
+    burpsuite
 
-  tor
+    tor
 
-  wpscan
+    wpscan
 
-  nikto
+    nikto
 
-  bettercap
+    bettercap
 
-  zmap
+    zmap
 
-  dirb
+    dirb
+
+    # nixgl
+
+    nixfmt
 
   ];
-
 
   # Variables Editor.
 
   environment.variables.EDITOR = "emacs";
-
 
   # Some programs need SUID wrappers, can be configured further or are
 
@@ -705,16 +690,13 @@
 
   # };
 
-
   programs.kdeconnect.enable = true;
-
 
   hardware.graphics = {
 
     enable = true;
 
   };
-
 
   # List services that you want to enable:
 
@@ -724,18 +706,15 @@
 
     enable = true;
 
-   };
+  };
 
-
-    i18n = {
+  i18n = {
 
     supportedLocales = [ "en_GB.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
 
-
     defaultLocale = "en_GB.UTF-8";
 
-    };
-
+  };
 
   console = {
 
@@ -749,16 +728,13 @@
 
   };
 
-
   fonts.packages = with pkgs; [ terminus_font ];
-
 
   # packages = [
 
-    # pkgs.gpm
+  # pkgs.gpm
 
   # ;
-
 
   services = {
 
@@ -770,11 +746,11 @@
 
       # options = {
 
-        # device = "/dev/input/mice";
+      # device = "/dev/input/mice";
 
-        # mapname = "gpm";
+      # mapname = "gpm";
 
-        # timeout = "12";
+      # timeout = "12";
 
       # };
 
@@ -800,9 +776,19 @@
 
       videoDrivers = [ "modesetting" ];
 
+      # windowManager = {
+
+      # hyprland = {
+
+      # enable = true;
+
+      # };
+
+      # };
+
       # wayland = {
 
-        # enable = true;
+      # enable = true;
 
       # };
 
@@ -810,13 +796,13 @@
 
         # wayland = {
 
-          # enable = true;
+        # enable = true;
 
         # };
 
         # plasma6 = {
 
-          # enable = true;
+        # enable = true;
 
         # };
 
@@ -842,17 +828,17 @@
 
         # plasma6 = {
 
-          # enable = true;
+        # enable = true;
 
         # };
 
         # package = {
 
-          # sddm
+        # sddm
 
-          # pkgs.sddm.override { withQt6 = true; };
+        # pkgs.sddm.override { withQt6 = true; };
 
-          # pkgs.sddm.overrideAttrs = (oldAttrs: { buildInputs = (oldAttrs.buildInputs or []) ++ [ pkgs.qt6.qtbase ]; }# );
+        # pkgs.sddm.overrideAttrs = (oldAttrs: { buildInputs = (oldAttrs.buildInputs or []) ++ [ pkgs.qt6.qtbase ]; }# );
 
         # };
 
@@ -878,7 +864,6 @@
 
   };
 
-
   # Enable Programs.
 
   programs = {
@@ -886,35 +871,34 @@
     adb = {
 
       enable = true;
-    	
+
     };
-  	
+
   };
 
   # Add users to specific groups.
 
   # users = {
 
-    # groups = {
+  # groups = {
 
-      # adbusers = {};
+  # adbusers = {};
 
-      # kvm = {};
+  # kvm = {};
 
-    # };
-
-    # users = {
-
-      # armg0268xz59 = {
-
-        # extragroups = [ "adbusers" "kvm" ];
-
-      # };
-    	
-    # };
-  	
   # };
 
+  # users = {
+
+  # armg0268xz59 = {
+
+  # extragroups = [ "adbusers" "kvm" ];
+
+  # };
+
+  # };
+
+  # };
 
   # Open ports in the firewall.
 
@@ -926,7 +910,6 @@
 
   # networking.firewall.enable = false;
 
-
   # Copy the NixOS configuration file and link it from the resulting system
 
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -935,15 +918,11 @@
 
   # system.copySystemConfiguration = true;
 
-
   # Enable NixOS Nix Flakes.
 
-  nix.settings.experimental-features =  [ "nix-command" "flakes" ];
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   nixpkgs.config.allowUnfree = true;
-
-
 
   # This option defines the first version of NixOS you have installed on this particular machine,
 
@@ -980,7 +959,6 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
 
   system.stateVersion = "24.11"; # Did you read the comment?
-
 
 }
 
